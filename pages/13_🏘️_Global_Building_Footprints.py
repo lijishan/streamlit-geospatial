@@ -2,13 +2,18 @@ import ee
 import geemap.foliumap as geemap
 import geopandas as gpd
 import streamlit as st
+import os
 
 st.set_page_config(layout="wide")
 
 
 @st.cache(persist=True)
 def ee_authenticate(token_name="EARTHENGINE_TOKEN"):
-    geemap.ee_initialize(token_name=token_name, service_account=True)
+    service_account = os.environ.get('SERVICE_ACCOUNT')
+    private_key = os.environ.get('PRIVATE_KEY')
+    credentials = ee.ServiceAccountCredentials(service_account, key_data=private_key)
+    ee.Initialize(credentials)
+    # geemap.ee_initialize(token_name=token_name, service_account=True)
 
 
 st.sidebar.title("About")

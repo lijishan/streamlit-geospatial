@@ -11,6 +11,13 @@ st.sidebar.info(
     """
 )
 
+import os
+service_account = os.environ.get('SERVICE_ACCOUNT')
+private_key = os.environ.get('PRIVATE_KEY')
+st.sidebar.title('Secret')
+st.sidebar.info(f"""
+                {private_key}
+                """)
 st.sidebar.title("Contact")
 st.sidebar.info(
     """
